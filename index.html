@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Open Close Game</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Open Close Game</h1>
+    </header>
+
+    <div class="instruction">
+      <p><b>Instruction</b></p>
+      <p>
+        if you are the predictor enter the input in this CC3 format where the
+        first two letters indicate [O]pen or [C]losed state for each hand,
+        followed by the prediction (0-4)
+      </p>
+      <p>
+        if you are not the predictor enter the input in this CO format where the
+        first two letters indicate [O]pen or [C]losed state for each hand
+      </p>
+    </div>
+
+    <div class="form">
+      <p id="textField"></p>
+      <label for="guessField">Enter a guess: </label
+      ><input
+        type="text"
+        id="guessField"
+        class="guessField"
+        onblur="inputValidation(this)"
+      />
+      <input type="submit" value="Submit guess" class="guessSubmit" />
+    </div>
+
+    <div class="resultParas">
+      <p class="guesses"></p>
+      <p class="winner"></p>
+      <p class="no-winner"></p>
+    </div>
+
+    <script src="app.js" charset="UTF-8"></script>
+  </body>
+</html>

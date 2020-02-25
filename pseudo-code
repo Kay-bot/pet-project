@@ -1,0 +1,32 @@
+start main
+	boolean IsPlayerPredictor = TRUE
+	'Welcome to the game!'
+	while TRUE
+		if IsPlayerPredictor
+			'You are the predictor, what is your input?'
+		else 
+			'AI is the predictor, what is your input?'
+		end if	
+		PlayerInput = GetPlayerInput()
+		AIInput = GetRandomAIinput()
+		
+		if PlayerInput = AIInput
+			if IsPredictor
+				'You Win'
+			else 	
+				'You lose'
+			end if
+		else
+			if IsPredictor	
+				'You lose'
+			else
+				'You Win'
+			end if
+		end if
+		
+		PlayAgain = 'Do you want to play again?'
+		if not PlayAgain 
+			end game
+		end if
+		IsPlayerPredictor = FALSE
+	do
