@@ -116,11 +116,12 @@ guessSubmit.addEventListener("click", checkOpen);
 // }
 
 function inputValidation(inputTxt) {
-  if ((isPlayerPredictor = true)) {
-    const inputAllow = ["o", "c", "O", "C", 0, 1, 2, 3, 4];
+  const isPlayerPredictor = false;
+  if (isPlayerPredictor) {
+    let inputAllow = /^[oc](?:)[oc][01234]$/;
     const validate = document.getElementById("textField");
     if (inputTxt.value !== "") {
-      if (inputTxt.value.length <= 4) {
+      if (inputTxt.value.length <= 3) {
         if (inputTxt.value.match(inputAllow)) {
           validate.textContent = "good input";
           validate.style.color = "green";
@@ -139,6 +140,26 @@ function inputValidation(inputTxt) {
       validate.style.color = "red";
     }
   } else {
-    alert("Bad input: no prediction expected, you are not the predictor");
+    let inputAllow = /^[oc](?:)[oc]/;
+    const validate = document.getElementById("textField");
+    if (inputTxt.value !== "") {
+      if (inputTxt.value.length <= 2) {
+        if (inputTxt.value.match(inputAllow)) {
+          validate.textContent = "good input";
+          validate.style.color = "green";
+        } else {
+          validate.textContent =
+            "Bad input: no prediction expected, you are not the predictor.";
+          validate.style.color = "red";
+        }
+      } else {
+        validate.textContent =
+          "Bad input: no prediction expected, you are not the predictor.";
+        validate.style.color = "red";
+      }
+    } else {
+      validate.textContent = "empty input";
+      validate.style.color = "red";
+    }
   }
 }
