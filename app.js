@@ -3,7 +3,6 @@ const guessSubmit = document.querySelector(".guessSubmit");
 const guessField = document.querySelector(".guessField");
 const guesses = document.querySelector(".guesses");
 const winner = document.querySelector(".winner");
-const no_winner = document.querySelector(".no-winner");
 const alertMessage = document.getElementById("alert");
 const textField = document.getElementById("textField");
 
@@ -57,7 +56,7 @@ function checkWinner() {
   guessField.focus();
 
   isPlayerPredictor = !isPlayerPredictor;
-  console.log("Predictor is " + predictor + "Player is " + player);
+
   if (
     (predictor === "oo4" && player === "oo") ||
     (predictor === "oo3" && player === "oc") ||
@@ -81,15 +80,12 @@ function checkWinner() {
       }
     }, 1000);
     return (winner.textContent = playerText + " Wins");
-
-    // setGameOver();
   } else {
     return (winner.textContent = "No winner");
   }
 }
 
 function setGameOver() {
-  isAlPredictor = true;
   guessField.disabled = true;
   guessSubmit.disabled = true;
 }
@@ -100,22 +96,15 @@ function game() {
   textField.textContent = "";
 
   alert("Welcome to the game");
-  // do {
-  newRoundStarted();
-  // isPlayerPredictor = !isPlayerPredictor;
 
-  // } while (true);
+  newRoundStarted();
 }
 
 function newRoundStarted() {
   if (isPlayerPredictor) {
     alertMessage.textContent = "You are the predictor, what is your input?";
-    console.log(" User is the predictor");
-    // alert("You are the predictor, what is your input?");
   } else {
-    // alert("AI is the predictor, what is your input?");
     alertMessage.textContent = "AI is the predictor, what is your input?";
-    console.log(" AI is the predictor");
   }
 }
 
