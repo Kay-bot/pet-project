@@ -1,3 +1,4 @@
+const startGame = document.getElementById("start");
 const guessSubmit = document.querySelector(".guessSubmit");
 const guessField = document.querySelector(".guessField");
 const guesses = document.querySelector(".guesses");
@@ -114,9 +115,26 @@ guessSubmit.addEventListener("click", checkOpen);
 //   document.body.appendChild(resetButton);
 //   resetButton.addEventListener("click", swapPlayer);
 // }
+function game() {
+  const isPlayerPredictor = true;
+  alert("Welcome to the game");
+
+  if (isPlayerPredictor) {
+    alert("You are the predictor, what is your input?");
+  } else {
+    alert("AI is the predictor, what is your input?");
+  }
+}
+
+function main() {
+  startGame.addEventListener("click", function() {
+    game();
+  });
+}
+main();
 
 function inputValidation(inputTxt) {
-  const isPlayerPredictor = false;
+  const isPlayerPredictor = true;
   if (isPlayerPredictor) {
     let inputAllow = /^[oc](?:)[oc][01234]$/;
     const validate = document.getElementById("textField");
@@ -162,4 +180,5 @@ function inputValidation(inputTxt) {
       validate.style.color = "red";
     }
   }
+  checkOpen();
 }
