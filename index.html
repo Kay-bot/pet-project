@@ -24,25 +24,25 @@
       </p>
     </div>
     <div class="start-game">
-      <button id="start" onclick="main()">Start the game</button>
+      <button id="start" ">Start the game</button>
     </div>
 
     <div class="form">
+      <p id="alert"></p>
       <p id="textField"></p>
       <label for="guessField">Enter a guess: </label
       ><input
         type="text"
         id="guessField"
         class="guessField"
-        onblur="inputValidation(this)"
+       
       />
-      <input type="submit" value="Submit guess" class="guessSubmit" />
+      <input type="submit" value="Submit guess" class="guessSubmit"  onclick="inputValidation()"/>
     </div>
 
     <div class="resultParas">
       <p class="guesses"></p>
       <p class="winner"></p>
-      <p class="no-winner"></p>
     </div>
 
     <script src="app.js" charset="UTF-8"></script>

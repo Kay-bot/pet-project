@@ -4,8 +4,8 @@ const guessField = document.querySelector(".guessField");
 const guesses = document.querySelector(".guesses");
 const winner = document.querySelector(".winner");
 const no_winner = document.querySelector(".no-winner");
-const isPlayerPredictor = false;
-const isAiPredictor = false;
+const alertMessage = document.getElementById("alert");
+let isPlayerPredictor = true;
 let resetButton;
 
 function getAiAsPlayer() {
@@ -37,43 +37,52 @@ function getAiAsPredictor() {
 }
 
 function checkWinner() {
-  const aiPlayer = getAiAsPlayer();
-  let userPredictor = guessField.value;
-  guesses.textContent += userPredictor;
+  let predictor;
+  let player;
+  let user = guessField.value.toLowerCase();
+  if (isPlayerPredictor) {
+    predictor = user;
+    player = getAiAsPlayer();
+    playerText = "User";
+  } else {
+    predictor = getAiAsPredictor();
+    player = guessField.value.toLowerCase();
+    playerText = "AI";
+  }
+
+  guesses.textContent = user;
   guessField.value = "";
   guessField.focus();
 
+  isPlayerPredictor = !isPlayerPredictor;
+  console.log("Predictor is " + predictor + "Player is " + player);
   if (
-    (userPredictor === "oo4" && aiPlayer === "oo") ||
-    (userPredictor === "oo3" && aiPlayer === "oc") ||
-    (userPredictor === "oo2" && aiPlayer === "cc") ||
-    (userPredictor === "oc1" && aiPlayer === "cc") ||
-    (userPredictor === "oc3" && aiPlayer === "oo") ||
-    (userPredictor === "oc2" && aiPlayer === "co") ||
-    (userPredictor === "oc1" && aiPlayer === "cc") ||
-    (userPredictor === "co1" && aiPlayer === "cc") ||
-    (userPredictor === "co2" && aiPlayer === "oc") ||
-    (userPredictor === "co3" && aiPlayer === "oo") ||
-    (userPredictor === "cc0" && aiPlayer === "cc") ||
-    (userPredictor === "cc1" && aiPlayer === "oc") ||
-    (userPredictor === "cc2" && aiPlayer === "oo")
+    (predictor === "oo4" && player === "oo") ||
+    (predictor === "oo3" && player === "oc") ||
+    (predictor === "oo2" && player === "cc") ||
+    (predictor === "oc1" && player === "cc") ||
+    (predictor === "oc3" && player === "oo") ||
+    (predictor === "oc2" && player === "co") ||
+    (predictor === "oc1" && player === "cc") ||
+    (predictor === "co1" && player === "cc") ||
+    (predictor === "co2" && player === "oc") ||
+    (predictor === "co3" && player === "oo") ||
+    (predictor === "cc0" && player === "cc") ||
+    (predictor === "cc1" && player === "oc") ||
+    (predictor === "cc2" && player === "oo")
   ) {
-    return (winner.textContent = "You WIN!!");
+    return (winner.textContent = playerText + " Wins");
+
     // setGameOver();
   } else {
-    return (no_winner.textContent = "No winner");
-    // swapPlayer();
+    return (winner.textContent = "No winner");
   }
 }
 
 // function swapPlayer() {
-//   const resetParas = document.querySelectorAll(".resultParas p");
-//   for (let i = 0; i < resetParas.length; i++) {
-//     resetParas[i].textContent = "";
-//   }
 //   const aiPredictor = getAiAsPredictor();
 //   let userPlayer = guessField.value;
-//   guesses.textContent += userPlayer;
+//   guesses.textContent = userPlayer;
 
 //   isPlayerPredictor = false;
 //   guessField.disabled = false;
@@ -104,23 +113,34 @@ function checkWinner() {
 //   }
 // }
 
-// function setGameOver() {
-//   isAlPredictor = true;
-//   guessField.disabled = true;
-//   guessSubmit.disabled = true;
-//   resetButton = document.createElement("button");
-//   resetButton.textContent = "Do you want to play again?";
-//   document.body.appendChild(resetButton);
-//   resetButton.addEventListener("click", swapPlayer);
-// }
-function game() {
-  const isPlayerPredictor = true;
-  alert("Welcome to the game");
+function setGameOver() {
+  isAlPredictor = true;
+  guessField.disabled = true;
+  guessSubmit.disabled = true;
+  resetButton = document.createElement("button");
+  resetButton.textContent = "Do you want to play again?";
+  document.body.appendChild(resetButton);
+  resetButton.addEventListener("click", swapPlayer);
+}
 
+function game() {
+  alert("Welcome to the game");
+  // do {
+  newRoundStarted();
+  // isPlayerPredictor = !isPlayerPredictor;
+
+  // } while (true);
+}
+
+function newRoundStarted() {
   if (isPlayerPredictor) {
-    alert("You are the predictor, what is your input?");
+    alertMessage.textContent = "You are the predictor, what is your input?";
+    console.log(" User is the predictor");
+    // alert("You are the predictor, what is your input?");
   } else {
-    alert("AI is the predictor, what is your input?");
+    // alert("AI is the predictor, what is your input?");
+    alertMessage.textContent = "AI is the predictor, what is your input?";
+    console.log(" AI is the predictor");
   }
 }
 
@@ -131,14 +151,22 @@ function main() {
 }
 main();
 
-function inputValidation(inputTxt) {
-  const isPlayerPredictor = true;
+function inputValidation() {
+  inputValue = guessField.value.toLowerCase();
+  console.log(
+    "inputValidation called: input is " +
+      inputValue +
+      " and isPlayerPredictor is " +
+      isPlayerPredictor
+  );
+
   if (isPlayerPredictor) {
     let inputAllow = /^[oc](?:)[oc][01234]$/;
     const validate = document.getElementById("textField");
-    if (inputTxt.value !== "") {
-      if (inputTxt.value.length <= 3) {
-        if (inputTxt.value.match(inputAllow)) {
+
+    if (inputValue !== "") {
+      if (inputValue.length <= 3) {
+        if (inputValue.match(inputAllow)) {
           validate.textContent = "good input";
           validate.style.color = "green";
         } else {
@@ -158,9 +186,9 @@ function inputValidation(inputTxt) {
   } else {
     let inputAllow = /^[oc](?:)[oc]/;
     const validate = document.getElementById("textField");
-    if (inputTxt.value !== "") {
-      if (inputTxt.value.length <= 2) {
-        if (inputTxt.value.match(inputAllow)) {
+    if (inputValue !== "") {
+      if (inputValue.length <= 2) {
+        if (inputValue.match(inputAllow)) {
           validate.textContent = "good input";
           validate.style.color = "green";
         } else {
@@ -179,4 +207,5 @@ function inputValidation(inputTxt) {
     }
   }
   checkWinner();
+  newRoundStarted();
 }
