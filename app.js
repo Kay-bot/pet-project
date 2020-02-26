@@ -36,7 +36,7 @@ function getAiAsPredictor() {
   return aiPredictor[randomNumberAspredictor];
 }
 
-function checkOpen() {
+function checkWinner() {
   const aiPlayer = getAiAsPlayer();
   let userPredictor = guessField.value;
   guesses.textContent += userPredictor;
@@ -65,8 +65,6 @@ function checkOpen() {
     // swapPlayer();
   }
 }
-
-guessSubmit.addEventListener("click", checkOpen);
 
 // function swapPlayer() {
 //   const resetParas = document.querySelectorAll(".resultParas p");
@@ -180,5 +178,5 @@ function inputValidation(inputTxt) {
       validate.style.color = "red";
     }
   }
-  checkOpen();
+  checkWinner();
 }
