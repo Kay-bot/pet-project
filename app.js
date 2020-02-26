@@ -5,6 +5,8 @@ const guesses = document.querySelector(".guesses");
 const winner = document.querySelector(".winner");
 const no_winner = document.querySelector(".no-winner");
 const alertMessage = document.getElementById("alert");
+const textField = document.getElementById("textField");
+
 let isPlayerPredictor = true;
 let resetButton;
 
@@ -71,6 +73,13 @@ function checkWinner() {
     (predictor === "cc1" && player === "oc") ||
     (predictor === "cc2" && player === "oo")
   ) {
+    setTimeout(function confirmExit() {
+      if (confirm("Do you want to continue playing?")) {
+        game();
+      } else {
+        setGameOver();
+      }
+    }, 1000);
     return (winner.textContent = playerText + " Wins");
 
     // setGameOver();
@@ -79,51 +88,17 @@ function checkWinner() {
   }
 }
 
-// function swapPlayer() {
-//   const aiPredictor = getAiAsPredictor();
-//   let userPlayer = guessField.value;
-//   guesses.textContent = userPlayer;
-
-//   isPlayerPredictor = false;
-//   guessField.disabled = false;
-//   guessSubmit.disabled = false;
-//   guessField.value = "";
-//   guessField.focus();
-
-//   if (
-//     (aiPredictor === "oo4" && userPlayer === "oo") ||
-//     (aiPredictor === "oo3" && userPlayer === "oc") ||
-//     (aiPredictor === "oo2" && userPlayer === "cc") ||
-//     (aiPredictor === "oc1" && userPlayer === "cc") ||
-//     (aiPredictor === "oc3" && userPlayer === "oo") ||
-//     (aiPredictor === "oc2" && userPlayer === "co") ||
-//     (aiPredictor === "oc1" && userPlayer === "cc") ||
-//     (aiPredictor === "co1" && userPlayer === "cc") ||
-//     (aiPredictor === "co2" && userPlayer === "oc") ||
-//     (aiPredictor === "co3" && userPlayer === "oo") ||
-//     (aiPredictor === "cc0" && userPlayer === "cc") ||
-//     (aiPredictor === "cc1" && userPlayer === "oc") ||
-//     (aiPredictor === "cc2" && userPlayer === "oo")
-//   ) {
-//     return (winner.textContent = "You WIN!!");
-//     setGameOver();
-//   } else {
-//     return (no_winner.textContent = "No winner");
-//     swapPlayer();
-//   }
-// }
-
 function setGameOver() {
   isAlPredictor = true;
   guessField.disabled = true;
   guessSubmit.disabled = true;
-  resetButton = document.createElement("button");
-  resetButton.textContent = "Do you want to play again?";
-  document.body.appendChild(resetButton);
-  resetButton.addEventListener("click", swapPlayer);
 }
 
 function game() {
+  guesses.textContent = "";
+  winner.textContent = "";
+  textField.textContent = "";
+
   alert("Welcome to the game");
   // do {
   newRoundStarted();
